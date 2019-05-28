@@ -12,8 +12,7 @@
         var pageIndex = 1;
         RestUtils.ajax(Resource.approve.getApprovalPending + pageIndex + "/" + pageSize, Resource.approve.getApprovalPendingMethod, {},
             function (result) {
-
-                alert(JSON.stringify(result));
+                swal("提示!", JSON.stringify(result), "info");
             });
     });
 </script>

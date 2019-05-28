@@ -50,7 +50,7 @@ var RestUtils = function () {
                     if (result.code == 200) {
                         func(result.data);
                     } else {
-                        swal(result.message);
+                        swal("提示!", result.message, "error");
                     }
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {

@@ -22,7 +22,7 @@ public class ApproveController {
     @ApiOperation(value = "获取待审批数据", notes = "获取待审批数据")
     @RequestMapping(path = "getApprovalPending/{pageIndex}/{pageSize}", method = GET)
     public Response<List<ApprovalPending>> getApprovalPending(@PathVariable int pageIndex, @PathVariable int pageSize) {
-        Response<List<ApprovalPending>> response = new Response<>(ResponseCode.Unauthorized);
+        Response<List<ApprovalPending>> response = new Response<>(ResponseCode.Success);
         List<ApprovalPending> data = new ArrayList<>();
         ApprovalPending ap1 = new ApprovalPending();
         ap1.setCode("11108");
