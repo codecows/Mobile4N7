@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    $(function () {
+        var pageSize = 20;
+        var pageIndex = 1;
+        RestUtils.ajax(Resource.approve.getApprovalPending + pageIndex + "/" + pageSize, Resource.approve.getApprovalPendingMethod, {},
+            function (result) {
+
+                alert(JSON.stringify(result));
+            });
+    });
+</script>
+</body>
+</html>

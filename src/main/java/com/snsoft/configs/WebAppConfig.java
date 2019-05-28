@@ -11,6 +11,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new CustomerInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/users/login/**")
+                .excludePathPatterns("/auth/getToken/**")
                 .excludePathPatterns("/error/**")
                 .excludePathPatterns("/swagger-resources/**");
         super.addInterceptors(registry);
