@@ -13,15 +13,15 @@
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
                         <!--connectionURL="jdbc:mysql://39.105.136.87:3306/blast_result_manager"-->
                         <!--userId="root" password="MoOoO0Oo00oOo0n741!@#">-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.7.29:3306/blast_result_manager"
-                        userId="root" password="root">
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://192.168.7.36:1433;DatabaseName=CodingData"
+                        userId="sa" password="abcd_1234">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--生成Model类存放位置-->
-        <javaModelGenerator targetPackage="com.dao.entities" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.snsoft.dao.entities" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -36,14 +36,13 @@
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
         <!--映射文件存放位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dao.mappers"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.snsoft.dao.mappers"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
         <!--系统表-->
-        <table tableName="user" schema="JCPT_HC3"></table>
-        <table tableName="result"></table>
-        <table tableName="lg"></table>
+        <table tableName="Detonator"></table>
+        <table tableName="Company"></table>
     </context>
 </generatorConfiguration>
