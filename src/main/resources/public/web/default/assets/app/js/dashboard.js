@@ -3,8 +3,11 @@ var Application = function () {
 
         $("#m_ver_menu").find(".m-menu__subnav li a").click(function () {
             $("#content").load($(this).attr("url"));
+            $("#m_aside_left_close_btn").click();
+
         });
-        $("#content").load("../pages/welcome.html");
+        //TODO 加载欢迎页
+        //$("#content").load("../pages/welcome.html");
     };
     var userName = "snsoft";
     var saveToken = function () {

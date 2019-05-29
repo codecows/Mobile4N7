@@ -24,16 +24,19 @@ public class ApproveController {
     public Response<List<ApprovalPending>> getApprovalPending(@PathVariable int pageIndex, @PathVariable int pageSize) {
         Response<List<ApprovalPending>> response = new Response<>(ResponseCode.Success);
         List<ApprovalPending> data = new ArrayList<>();
-        ApprovalPending ap1 = new ApprovalPending();
-        ap1.setCode("11108");
-        ap1.setName("进货审批");
-        ap1.setCount(7);
-        ApprovalPending ap2 = new ApprovalPending();
-        ap2.setCode("1399991");
-        ap2.setName("采购付款审批");
-        ap2.setCount(2);
-        data.add(ap1);
-        data.add(ap2);
+        for (int i = 0; i < 10; i++) {
+            ApprovalPending ap1 = new ApprovalPending();
+            ap1.setCode("11108");
+            ap1.setName("进货审批");
+            ap1.setCount(7 + i);
+            ApprovalPending ap2 = new ApprovalPending();
+            ap2.setCode("1399991");
+            ap2.setName("采购付款审批");
+            ap2.setCount(2 + i);
+            data.add(ap1);
+            data.add(ap2);
+        }
+
         response.setData(data);
         return response;
     }

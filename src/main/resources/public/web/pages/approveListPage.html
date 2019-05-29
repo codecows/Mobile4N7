@@ -5,14 +5,35 @@
     <title>Title</title>
 </head>
 <body>
+<ul id="approveListUl" class='list-group'>
+    <li class='list-group-item  list-group-item-info'>
+
+        Cras justo odio<span class='m-badge m-badge--danger pull-right'>14</span>
+    </li>
+    <li class='list-group-item  list-group-item-success'>
+
+        Cras justo odio<span class='m-badge m-badge--danger pull-right'>14</span>
+    </li>
+</ul>
 
 <script type="text/javascript">
     $(function () {
+        var approveListUl = $("#approveListUl");
+        approveListUl.on("click", "li", function () {
+            swal("提示!", "点击 , code  = " + $(this).attr("code"), "info");
+        });
         var pageSize = 20;
         var pageIndex = 1;
         RestUtils.ajax(Resource.approve.getApprovalPending + pageIndex + "/" + pageSize, Resource.approve.getApprovalPendingMethod, {},
             function (result) {
-                swal("提示!", JSON.stringify(result), "info");
+                approveListUl.empty();
+                $.each(result, function (index, item) {
+                    //swal("提示!", item.count.toString(), "info");
+                    var li = "  <li code='" + item.code + "' class='list-group-item ";
+                    li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>" + item.name;
+                    li += "<span class='m-badge m-badge--danger pull-right'>" + item.count.toString() + "</span></li>";
+                    approveListUl.append(li);
+                });
             });
     });
 </script>
