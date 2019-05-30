@@ -1,7 +1,7 @@
 package com.snsoft.controllers;
 
-import com.snsoft.dao.entities.Detonator;
-import com.snsoft.dao.mappers.DetonatorMapper;
+import com.snsoft.dao.entities.Acode;
+import com.snsoft.dao.mappers.AcodeMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,11 +14,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping("test")
 public class TestController {
     @Resource
-    private DetonatorMapper detonatorMapper;
+    private AcodeMapper acodeMapper;
 
     @RequestMapping(path = "getDetonators", method = GET)
-    public List<Detonator> getUsers() {
-        return detonatorMapper.selectByExample(null);
+    public List<Acode> getUsers() {
+        return acodeMapper.selectByExample(null);
     }
 
 }

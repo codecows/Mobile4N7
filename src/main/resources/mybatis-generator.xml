@@ -13,8 +13,11 @@
         <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
                         <!--connectionURL="jdbc:mysql://39.105.136.87:3306/blast_result_manager"-->
                         <!--userId="root" password="MoOoO0Oo00oOo0n741!@#">-->
+        <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
+                        <!--connectionURL="jdbc:sqlserver://192.168.7.36:1433;DatabaseName=CodingData"-->
+                        <!--userId="sa" password="abcd_1234">-->
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.7.36:1433;DatabaseName=CodingData"
+                        connectionURL="jdbc:sqlserver://192.168.21.129:1433;DatabaseName=N7APP"
                         userId="sa" password="abcd_1234">
         </jdbcConnection>
         <javaTypeResolver>
@@ -42,7 +45,10 @@
         </javaClientGenerator>
 
         <!--系统表-->
-        <table tableName="Detonator"></table>
-        <table tableName="Company"></table>
+        <!--<table tableName="Detonator"></table>-->
+        <!--<table tableName="Company"></table>-->
+        <table tableName="acode"></table>
+        <table tableName="ccode"></table>
+
     </context>
 </generatorConfiguration>
