@@ -4,11 +4,75 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h1>adadsfasdfasfsadfas</h1>
+<ul id="customersUl" class='list-group'>
+    <!--<li class='list-group-item  list-group-item-info'>-->
+    <!--<div>-->
+    <!--00001-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--NHI-->
+    <!--</div>-->
+    <!--</span>-->
+    <!--</li>-->
+    <!--<li code='00002' class='list-group-item  list-group-item-success'>-->
+
+    <!--ZD铸锻<span class='m-badge m-badge&#45;&#45;danger pull-right'>14</span>-->
+    <!--</li>-->
+</ul>
+
 </body>
 <script type="text/javascript">
     $(function () {
-        alert(222);
-    })
+        var customersUl = $("#customersUl");
+
+
+        customersUl.on("click", "li", function () {
+            var code = $(this).attr("code");
+            swal({
+                title: '提示?',
+                text: "是否确认删除?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '是',
+                cancelButtonText: '否',
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    swal(code);
+                    RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, {},
+                        function (result) {
+                            swal("提示!", "删除成功");
+                            RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, {},
+                                function (result) {
+                                    customersUl.empty();
+                                    $.each(result, function (index, item) {
+                                        //swal("提示!", item.count.toString(), "info");
+                                        var li = "  <li code='" + item.code + "' class='list-group-item ";
+                                        li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>" + item.code + "-" + item.name;
+                                        li += "<span class='m-badge m-badge--danger pull-right'>X</span></li>";
+                                        customersUl.append(li);
+
+                                    });
+                                });
+                        });
+                }
+            });
+
+        });
+
+
+        RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, {},
+            function (result) {
+                customersUl.empty();
+                $.each(result, function (index, item) {
+                    //swal("提示!", item.count.toString(), "info");
+                    var li = "  <li code='" + item.code + "' class='list-group-item ";
+                    li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>" + item.code + "-" + item.name;
+                    li += "<span class='m-badge m-badge--danger pull-right'>X</span></li>";
+                    customersUl.append(li);
+
+                });
+            });
+    });
 </script>
 </html>

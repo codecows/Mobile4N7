@@ -16,6 +16,7 @@
         <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
                         <!--connectionURL="jdbc:sqlserver://192.168.7.36:1433;DatabaseName=CodingData"-->
                         <!--userId="sa" password="abcd_1234">-->
+        <!--TODO mybatis-generator数据库连接地址-->
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
                         connectionURL="jdbc:sqlserver://192.168.21.129:1433;DatabaseName=N7APP"
                         userId="sa" password="abcd_1234">

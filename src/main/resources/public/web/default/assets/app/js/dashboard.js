@@ -7,7 +7,7 @@ var Application = function () {
 
         });
         //TODO 加载欢迎页
-        //$("#content").load("../pages/welcome.html");
+        $("#content").load("../pages/welcome.html");
     };
     var userName = "snsoft";
     var saveToken = function () {
@@ -70,7 +70,7 @@ var RestUtils = function () {
     };
 }();
 
-
+// TODO  URL
 // var baseUrl = "http://127.0.0.1:8086/";
 var baseUrl = "http://127.0.0.1:8080/";
 var Resource = {
@@ -81,6 +81,12 @@ var Resource = {
     approve: {
         getApprovalPending: baseUrl + "approve/getApprovalPending/",
         getApprovalPendingMethod: "GET"
+    },
+    customer:{
+        getCustomer:baseUrl+"ccode/getCustomers",
+        getCustomerMethod:"GET",
+        deleteCustomer:baseUrl+"ccode/deleteCustomerByCode",
+        deleteCustomerMethod:"POST"
     }
 
 };
