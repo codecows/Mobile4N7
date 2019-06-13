@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
 </head>
 <body>
+<div>
+    <button id="addButton">添加客户</button>
+</div>
 <ul id="customersUl" class='list-group'>
     <!--<li class='list-group-item  list-group-item-info'>-->
     <!--<div>-->
@@ -19,11 +22,64 @@
     <!--ZD铸锻<span class='m-badge m-badge&#45;&#45;danger pull-right'>14</span>-->
     <!--</li>-->
 </ul>
+<!--添加客户 界面-->
+<div class="modal fade" id="m_modal_customer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">新客户</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="cCodeInput" class="form-control-label">客户编码:</label>
+                        <input type="text" class="form-control" id="cCodeInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="cNameInput" class="form-control-label">客户名称:</label>
+                        <textarea class="form-control" id="cNameInput"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="saveButton" type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 <script type="text/javascript">
     $(function () {
         var customersUl = $("#customersUl");
+
+        //添加按钮事件绑定
+        $("#addButton").click(function () {
+            $("#m_modal_customer").modal("show");
+        });
+
+        //保存按钮事件绑定
+        $("#saveButton").click(function () {
+            RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, {},
+                function (result) {
+                    swal("提示!", "删除成功");
+                    //TODO  这里 Url 需要替换成添加的URL 和添加的方法
+                    var customer={};
+                    customer.code=$("#cCodeInput").val();
+                    customer.name=$("#cNameInput").val();
+                    RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, customer,
+                        function (result) {
+                            customersUl.empty();
+                            //TODO 这里调用刷新方法
+
+                        });
+                });
+        });
 
 
         customersUl.on("click", "li", function () {

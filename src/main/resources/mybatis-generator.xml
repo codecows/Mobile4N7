@@ -18,8 +18,8 @@
                         <!--userId="sa" password="abcd_1234">-->
         <!--TODO mybatis-generator数据库连接地址-->
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.21.129:1433;DatabaseName=N7APP"
-                        userId="sa" password="abcd_1234">
+                        connectionURL="jdbc:sqlserver://122.70.153.204:21433;DatabaseName=N7APP"
+                        userId="sa" password="oo00_aoqpdlOOO0o0oOO00omnnmnjj">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>

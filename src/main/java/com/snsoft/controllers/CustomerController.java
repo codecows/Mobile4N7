@@ -2,6 +2,7 @@ package com.snsoft.controllers;
 
 import com.snsoft.comn.Response;
 import com.snsoft.comn.ResponseCode;
+import com.snsoft.comn.ServiceException;
 import com.snsoft.models.ApprovalPending;
 import com.snsoft.models.Customer;
 import com.snsoft.services.CustomerService;
@@ -37,16 +38,25 @@ public class CustomerController {
 
     @ApiOperation(value = "添加客户数据", notes = "添加客户")
     @RequestMapping(path = "addCustomer", method = POST)
-    public Response<String> addCustomer() {
-
-        return null;
+    public Response<String> addCustomer(Customer customer) {
+        try {
+            Response<String> response = new Response<>(ResponseCode.Success);
+            customerService.addCustomer(customer);
+            return response;
+        } catch (ServiceException e) {
+            return e.getResponse();
+        }
     }
 
     @ApiOperation(value = "删除客户数据", notes = "删除客户")
     @RequestMapping(path = "deleteCustomerByCode/{code}", method = POST)
     public Response<String> deleteCustomerByCode(@PathVariable String code) {
-        customerService.deleteCustomerByCode(code);
-        Response<String> response = new Response<>(ResponseCode.Success);
-        return response;
+        try {
+            Response<String> response = new Response<>(ResponseCode.Success);
+            customerService.deleteCustomerByCode(code);
+            return response;
+        } catch (ServiceException e) {
+            return e.getResponse();
+        }
     }
 }
