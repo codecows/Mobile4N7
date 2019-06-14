@@ -26,7 +26,7 @@ public class VoucherController {
     private VoucherService voucherService;
 
     @ApiOperation(value = "获取凭证", notes = "获取凭证")
-    @RequestMapping(path = "getApprovalPending/{bCode}/{year}/{month}", method = GET)
+    @RequestMapping(path = "getVouchers/{bCode}/{year}/{month}", method = GET)
     public Response<List<Voucher>> getVouchers(
             @PathVariable String bCode,
             @PathVariable int year,
@@ -38,8 +38,8 @@ public class VoucherController {
     }
 
     @ApiOperation(value = "一级审批凭证", notes = "一级审批凭证")
-    @RequestMapping(path = "approve/{hId}", method = GET)
-    public Response<List<Voucher>> getVouchers(@PathVariable String hId) {
+    @RequestMapping(path = "approveVoucher/{hId}", method = GET)
+    public Response<List<Voucher>> approveVoucher(@PathVariable String hId) {
         Response<List<Voucher>> response = new Response<>(ResponseCode.Success);
         voucherService.approveVoucher(hId);
         return response;

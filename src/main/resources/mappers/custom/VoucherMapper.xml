@@ -17,6 +17,6 @@
     </select>
 
     <update id="updateVoucher" parameterType="java.lang.String">
-        UPDATE hvoucher SET vcheck = 1 WHERE id= #{id}
+        UPDATE hvoucher SET vcheck = '张三' WHERE id= #{id}
     </update>
 </mapper>

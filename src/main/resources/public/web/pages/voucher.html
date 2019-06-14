@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--面包屑导航-->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 id="subHeaderTitle" class="m-subheader__title m-subheader__title--separator">凭证查询</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span id="subHeaderLevel1" class="m-nav__link-text">基础信息</span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="" class="m-nav__link">
+                        <span id="subHeaderLevel2" class="m-nav__link-text">凭证</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--快捷菜单-->
+        <div>
+            <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                 m-dropdown-toggle="hover" aria-expanded="true">
+                <a href="#"
+                   class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                    <i class="la la-plus m--hide"></i>
+                    <i class="la la-ellipsis-h"></i>
+                </a>
+                <div class="m-dropdown__wrapper">
+                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                    <div class="m-dropdown__inner">
+                        <div class="m-dropdown__body">
+                            <div class="m-dropdown__content">
+                                <ul class="m-nav">
+                                    <li class="m-nav__item">
+                                        <a id="approveVoucherButton" href="javascript:;" class="m-nav__link">
+                                            新增凭证
+                                        </a>
+                                    </li>
+                                    <li class="m-nav__item">
+                                        <a href="javascript:;" class="m-nav__link">
+                                            删除凭证
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END: Subheader -->
+
+
+<!-- END: Subheader -->
+<div class="m-content">
+
+    <ul id="vouchersUl" class='list-group'>
+        <li class='list-group-item  list-group-item-info'>
+
+            <div>11111</div>
+
+
+            <i class='la la-check-square pull-right'></i>
+            <div>2222</div>
+            <div>2222</div>
+        </li>
+        <li code='00002' class='list-group-item  list-group-item-success'>
+
+            ZD铸锻<span class='m-badge m-badge--danger pull-right'>14</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+<script type="text/javascript">
+    //var hid = "";
+    $(function () {
+        // $("#subHeaderTitle").text("11111");
+        //var customersUl = $("#vouchersUl");
+
+        //添加按钮事件绑定
+        // $("#addButton").click(function () {
+        //     $("#m_modal_customer").modal("show");
+        // });
+        //添加按钮事件绑定
+        $("#approveVoucherButton").click(function () {
+            swal("添加凭证");
+        });
+
+
+        $("#vouchersUl").on("click", "li i", function () {
+            var hid = $(this).parent().attr("code");
+            swal({
+                title: '提示?',
+                text: "是否确认删除?",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: '是',
+                cancelButtonText: '否',
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    swal(hid);
+                    RestUtils.ajax(Resource.voucher.approveVoucher + hid, Resource.voucher.approveVoucherMethod, {},
+                        function (result) {
+                            swal("提示!", "审核成功");
+                        });
+                }
+            });
+
+        });
+
+
+        loadData();
+
+        function loadData() {
+            RestUtils.ajax(Resource.voucher.getVoucher + "01/2019/5", Resource.voucher.getVoucherMethod, {},
+                function (result) {
+                    $("#vouchersUl").empty();
+                    $.each(result, function (index, item) {
+                        //swal("提示!", item.count.toString(), "info");
+                        var li = "  <li code='" + item.id + "' class='list-group-item ";
+
+                        li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>";
+                        li += "<div><span class='m-badge m-badge--danger'> " + item.year + "-" + item.month + " </span>";
+                        li += "                       部门:" + item.bname + "</div>";
+                        li += "<i class='la la-check-square pull-right'></i>";
+                        li += "<div>凭证编号:" + item.id + "</div>";
+                        $("#vouchersUl").append(li);
+
+                    });
+                });
+        }
+    });
+</script>
+</html>

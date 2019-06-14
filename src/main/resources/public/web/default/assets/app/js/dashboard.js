@@ -36,8 +36,8 @@ var RestUtils = function () {
     };
     return {
         ajax: function (url, type, pars, func) {
-            headers.visitor= localStorage.getItem("visitor");
-            headers["x-access-token"]=localStorage.getItem("x-access-token");
+            headers.visitor = localStorage.getItem("visitor");
+            headers["x-access-token"] = localStorage.getItem("x-access-token");
             console.info("接口:" + url);
             console.info("header:" + JSON.stringify(headers));
             $.ajax({
@@ -82,11 +82,17 @@ var Resource = {
         getApprovalPending: baseUrl + "approve/getApprovalPending/",
         getApprovalPendingMethod: "GET"
     },
-    customer:{
-        getCustomer:baseUrl+"ccode/getCustomers",
-        getCustomerMethod:"GET",
-        deleteCustomer:baseUrl+"ccode/deleteCustomerByCode",
-        deleteCustomerMethod:"POST"
+    customer: {
+        getCustomer: baseUrl + "ccode/getCustomers",
+        getCustomerMethod: "GET",
+        deleteCustomer: baseUrl + "ccode/deleteCustomerByCode",
+        deleteCustomerMethod: "POST"
+    },
+    voucher: {
+        getVoucher: baseUrl + "voucher/getVouchers/",
+        getVoucherMethod: "GET",
+        approveVoucher: baseUrl + "voucher/approveVoucher/",
+        approveVoucherMethod: "GET",
     }
 
 };
