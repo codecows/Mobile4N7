@@ -2,7 +2,6 @@ package com.snsoft.controllers;
 
 import com.snsoft.comn.Response;
 import com.snsoft.comn.ResponseCode;
-import com.snsoft.comn.ServiceException;
 import com.snsoft.models.ApprovalPending;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

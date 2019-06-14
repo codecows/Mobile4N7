@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snsoft.dao.mappers.custom.VoucherMapper">
+    <resultMap id="BaseResultMap" type="com.snsoft.models.Voucher">
+        <id column="id" property="id"/>
+        <result column="year" property="year"/>
+        <result column="month" property="month"/>
+        <result column="vprepare" property="prepare"/>
+        <result column="bcode" property="bcode"/>
+        <result column="bname" property="bname"/>
+    </resultMap>
+    <select id="selectVouchers" resultMap="BaseResultMap">
+        SELECT h.id,h.year,h.month,h.vprepare,b.bcode,b.bname
+        FROM hvoucher h INNER JOIN bcode b ON h.bcode=b.bcode
+        WHERE h.year=#{year} AND h.month=#{month}
+        AND h.bcode=#{bCode}
+    </select>
+
+    <update id="updateVoucher" parameterType="java.lang.String">
+        UPDATE hvoucher SET vcheck = 1 WHERE id= #{id}
+    </update>
+</mapper>
