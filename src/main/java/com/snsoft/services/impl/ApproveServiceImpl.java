@@ -23,4 +23,9 @@ public class ApproveServiceImpl implements ApproveService {
     public List<ApprovalPendingItem> getPendingItems(String code) {
         return approveMapper.selectPendingApprvoeItem(code);
     }
+
+    @Override
+    public void approve(String id, String userName, String expl) {
+        approveMapper.updateApprvoeReuslt(id, userName, expl);
+    }
 }

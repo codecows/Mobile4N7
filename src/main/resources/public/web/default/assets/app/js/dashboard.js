@@ -83,6 +83,8 @@ var Resource = {
         getApprovalPendingMethod: "GET",
         getApprovalPendingItems: baseUrl + "approve/getApprovalPendingItems/",
         getApprovalPendingItemsMethod: "GET",
+        approve: baseUrl + "approve/approve/",
+        approveMethod: "GET",
     },
     customer: {
         getCustomer: baseUrl + "ccode/getCustomers",

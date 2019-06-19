@@ -24,7 +24,12 @@
         FROM STORESLIST
         WHERE SHEETCODE = #{code} AND STATUS = 30
     </select>
-    <!--<update id="updateVoucher" parameterType="java.lang.String">-->
-    <!--UPDATE hvoucher SET vcheck = '张三' WHERE id= #{id}-->
-    <!--</update>-->
+    <update id="updateApprvoeReuslt">
+        UPDATE tasklist
+        SET performwcode = #{userName},
+        performdate = GETDATE(),
+        performexpl = #{expl},
+        performstat = 9
+        WHERE taskid = #{id}
+    </update>
 </mapper>

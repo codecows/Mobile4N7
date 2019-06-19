@@ -40,4 +40,13 @@ public class ApproveController {
         response.setData(data);
         return response;
     }
+
+    @ApiOperation(value = "审批", notes = "审批")
+    @RequestMapping(path = "approve/{id}/{result}/{userName}", method = GET)
+    public Response<String> approve(
+            @PathVariable String id, @PathVariable String result, @PathVariable String userName) {
+        Response<String> response = new Response<>(ResponseCode.Success);
+        approveService.approve(id, userName, result.equals("Y") ? "同意" : "驳回");
+        return response;
+    }
 }

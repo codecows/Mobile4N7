@@ -9,4 +9,6 @@ public interface ApproveService {
     List<ApprovalPendingGroup> getPendingGroups(String userId);
 
     List<ApprovalPendingItem> getPendingItems(String code);
+
+    void approve(String id, String userName, String expl);
 }

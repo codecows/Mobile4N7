@@ -9,5 +9,7 @@ import java.util.List;
 public interface ApproveMapper {
     List<ApprovalPendingGroup> selectPendingApproveGroup(@Param("userId") String userId);
 
-    List<ApprovalPendingItem>   selectPendingApprvoeItem(@Param("code") String code);
+    List<ApprovalPendingItem> selectPendingApprvoeItem(@Param("code") String code);
+
+    void updateApprvoeReuslt(@Param("id") String id, @Param("userName") String userName, @Param("expl") String expl);
 }
