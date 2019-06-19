@@ -26,6 +26,6 @@ public class ApproveServiceImpl implements ApproveService {
 
     @Override
     public void approve(String id, String userName, String expl) {
-        approveMapper.updateApprvoeReuslt(id, userName, expl);
+        approveMapper.updateApprvoeReuslt("storeslist." + id, userName, expl);
     }
 }
