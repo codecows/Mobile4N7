@@ -5,39 +5,121 @@
     <title>Title</title>
 </head>
 <body>
-<ul id="approveListUl" class='list-group'>
-    <li class='list-group-item  list-group-item-info'>
 
-        Cras justo odio<span class='m-badge m-badge--danger pull-right'>14</span>
-    </li>
-    <li class='list-group-item  list-group-item-success'>
+<!--面包屑导航-->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 id="subHeaderTitle" class="m-subheader__title m-subheader__title--separator">待审批查询</h3>
+            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                <li class="m-nav__item m-nav__item--home">
+                    <a href="#" class="m-nav__link m-nav__link--icon">
+                        <i class="m-nav__link-icon la la-home"></i>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a href="javascript:;" class="m-nav__link">
+                        <span id="subHeaderLevel1" class="m-nav__link-text">审批</span>
+                    </a>
+                </li>
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                    <a id="pendingGroupButton" href="javascript:;" class="m-nav__link">
+                        <span id="subHeaderLevel2" class="m-nav__link-text">待审批</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--快捷菜单-->
+        <!--<div>-->
+        <!--<div class="m-dropdown m-dropdown&#45;&#45;inline m-dropdown&#45;&#45;arrow m-dropdown&#45;&#45;align-right m-dropdown&#45;&#45;align-push"-->
+        <!--m-dropdown-toggle="hover" aria-expanded="true">-->
+        <!--<a href="#"-->
+        <!--class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn&#45;&#45;outline-2x m-btn&#45;&#45;air m-btn&#45;&#45;icon m-btn&#45;&#45;icon-only m-btn&#45;&#45;pill  m-dropdown__toggle">-->
+        <!--<i class="la la-plus m&#45;&#45;hide"></i>-->
+        <!--<i class="la la-ellipsis-h"></i>-->
+        <!--</a>-->
+        <!--<div class="m-dropdown__wrapper">-->
+        <!--<span class="m-dropdown__arrow m-dropdown__arrow&#45;&#45;right m-dropdown__arrow&#45;&#45;adjust"></span>-->
+        <!--<div class="m-dropdown__inner">-->
+        <!--<div class="m-dropdown__body">-->
+        <!--<div class="m-dropdown__content">-->
+        <!--<ul class="m-nav">-->
+        <!--<li class="m-nav__item">-->
+        <!--<a id="approveVoucherButton" href="javascript:;" class="m-nav__link">-->
+        <!--新增凭证-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--<li class="m-nav__item">-->
+        <!--<a href="javascript:;" class="m-nav__link">-->
+        <!--删除凭证-->
+        <!--</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+</div>
 
-        Cras justo odio<span class='m-badge m-badge--danger pull-right'>14</span>
-    </li>
+<div class="m-content">
+    <ul id="approveListUl" class='list-group'>
+        <!--<li class='list-group-item  list-group-item-info'>-->
 
+        <!--Cras justo odio<span class='m-badge m-badge&#45;&#45;danger pull-right'>14</span>-->
+        <!--</li>-->
+        <!--<li class='list-group-item  list-group-item-success'>-->
 
-</ul>
-
+        <!--Cras justo odio<span class='m-badge m-badge&#45;&#45;danger pull-right'>14</span>-->
+        <!--</li>-->
+    </ul>
+</div>
 <script type="text/javascript">
     $(function () {
-        var approveListUl = $("#approveListUl");
-        approveListUl.on("click", "li", function () {
-            swal("提示!", "点击 , code  = " + $(this).attr("code"), "info");
+        $("#approveListUl").on("click", "li", function () {
+            //swal("提示!", "点击 , code  = " + $(this).attr("code"), "info");
+            itemDataLoad($(this).attr("code"))
         });
-        var pageSize = 20;
-        var pageIndex = 1;
-        RestUtils.ajax(Resource.approve.getApprovalPending + pageIndex + "/" + pageSize, Resource.approve.getApprovalPendingMethod, {},
+        $("#pendingGroupButton").click(function () {
+            groupDataLoad()
+        });
+        groupDataLoad();
+    });
+
+    function itemDataLoad(code) {
+        RestUtils.ajax(Resource.approve.getApprovalPendingItems + code, Resource.approve.getApprovalPendingItemsMethod, {},
             function (result) {
-                approveListUl.empty();
+                $("#approveListUl").empty();
+                if (result.length <= 0) {
+                    $("#approveListUl").append("未找到数据!");
+                }
+                $.each(result, function (index, item) {
+                    //swal("提示!", item.count.toString(), "info");
+                    var li = "  <li code='" + item.id + "' class='list-group-item ";
+                    li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>单号:" + item.code;
+                    li += "<span class='m-badge m-badge--danger pull-right'>" + item.contractNumber + "</span></li>";
+                    $("#approveListUl").append(li);
+                });
+            });
+    }
+
+    function groupDataLoad() {
+        RestUtils.ajax(Resource.approve.getApprovalPending + localStorage.getItem("visitor"), Resource.approve.getApprovalPendingMethod, {},
+            function (result) {
+                $("#approveListUl").empty();
                 $.each(result, function (index, item) {
                     //swal("提示!", item.count.toString(), "info");
                     var li = "  <li code='" + item.code + "' class='list-group-item ";
-                    li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>" + item.name;
+                    li += (index % 2 == 0 ? "list-group-item-info" : "list-group-item-success") + "'>" + item.code;
                     li += "<span class='m-badge m-badge--danger pull-right'>" + item.count.toString() + "</span></li>";
-                    approveListUl.append(li);
+                    $("#approveListUl").append(li);
                 });
             });
-    });
+    }
 </script>
 </body>
 </html>

@@ -1,17 +1,9 @@
 package com.snsoft.models;
 
-public class ApprovalPending {
+public class ApprovalPendingGroup {
     private String code;
     private String name;
-    private int count;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
+    private String count;
 
     public String getName() {
         return name;
@@ -21,11 +13,19 @@ public class ApprovalPending {
         this.name = name;
     }
 
-    public int getCount() {
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(String count) {
         this.count = count;
     }
 }

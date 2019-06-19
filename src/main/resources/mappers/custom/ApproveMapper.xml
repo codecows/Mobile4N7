@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.snsoft.dao.mappers.custom.ApproveMapper">
+    <resultMap id="ApproveGroupResultMap" type="com.snsoft.models.ApprovalPendingGroup">
+        <id column="code" property="code"/>
+        <result column="count" property="count"/>
+        <result column="name" property="name"/>
+    </resultMap>
+    <select id="selectPendingApproveGroup" resultMap="ApproveGroupResultMap" parameterType="java.lang.String">
+        SELECT WFCODE 'code',COUNT(*) 'count',
+        CASE wfcode WHEN '11108' THEN '进货单' ELSE '采购付款' END 'name'
+        FROM TASKLIST
+        WHERE TASKEXPL LIKE '%请审批%'
+        AND performwcode IS NULL GROUP BY WFCODE
+    </select>
+
+    <resultMap id="PendingApproveItemResultMap" type="com.snsoft.models.ApprovalPendingItem">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="contractNumber" property="contractNumber"/>
+    </resultMap>
+    <select id="selectPendingApprvoeItem" resultMap="PendingApproveItemResultMap" parameterType="java.lang.String">
+        SELECT islcode as 'id',SLCODE AS 'code',ORDCODE as 'contractNumber'
+        FROM STORESLIST
+        WHERE SHEETCODE = #{code} AND STATUS = 30
+    </select>
+    <!--<update id="updateVoucher" parameterType="java.lang.String">-->
+    <!--UPDATE hvoucher SET vcheck = '张三' WHERE id= #{id}-->
+    <!--</update>-->
+</mapper>

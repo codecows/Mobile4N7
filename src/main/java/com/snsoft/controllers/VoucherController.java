@@ -2,18 +2,15 @@ package com.snsoft.controllers;
 
 import com.snsoft.comn.Response;
 import com.snsoft.comn.ResponseCode;
-import com.snsoft.models.ApprovalPending;
 import com.snsoft.models.Voucher;
 import com.snsoft.services.VoucherService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;

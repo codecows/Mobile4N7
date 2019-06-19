@@ -2,14 +2,16 @@ package com.snsoft.controllers;
 
 import com.snsoft.comn.Response;
 import com.snsoft.comn.ResponseCode;
-import com.snsoft.models.ApprovalPending;
+import com.snsoft.models.ApprovalPendingGroup;
+import com.snsoft.models.ApprovalPendingItem;
+import com.snsoft.services.ApproveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -18,24 +20,23 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 @RequestMapping("approve")
 public class ApproveController {
-    @ApiOperation(value = "获取待审批数据", notes = "获取待审批数据")
-    @RequestMapping(path = "getApprovalPending/{pageIndex}/{pageSize}", method = GET)
-    public Response<List<ApprovalPending>> getApprovalPending(@PathVariable int pageIndex, @PathVariable int pageSize) {
-        Response<List<ApprovalPending>> response = new Response<>(ResponseCode.Success);
-        List<ApprovalPending> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ApprovalPending ap1 = new ApprovalPending();
-            ap1.setCode("11108");
-            ap1.setName("进货审批");
-            ap1.setCount(7 + i);
-            ApprovalPending ap2 = new ApprovalPending();
-            ap2.setCode("1399991");
-            ap2.setName("采购付款审批");
-            ap2.setCount(2 + i);
-            data.add(ap1);
-            data.add(ap2);
-        }
+    @Resource
+    private ApproveService approveService;
 
+    @ApiOperation(value = "获取待审批数据(分组)", notes = "获取待审批数据(分组)")
+    @RequestMapping(path = "getApprovalPending/{userId}", method = GET)
+    public Response<List<ApprovalPendingGroup>> getApprovalPending(@PathVariable String userId) {
+        Response<List<ApprovalPendingGroup>> response = new Response<>(ResponseCode.Success);
+        List<ApprovalPendingGroup> data = approveService.getPendingGroups(userId);
+        response.setData(data);
+        return response;
+    }
+
+    @ApiOperation(value = "获取待审批数据", notes = "获取待审批数据")
+    @RequestMapping(path = "getApprovalPendingItems/{code}", method = GET)
+    public Response<List<ApprovalPendingItem>> getApprovalPendingItems(@PathVariable String code) {
+        Response<List<ApprovalPendingItem>> response = new Response<>(ResponseCode.Success);
+        List<ApprovalPendingItem> data = approveService.getPendingItems(code);
         response.setData(data);
         return response;
     }
