@@ -118,7 +118,7 @@
             }).then(function (result) {
                 if (result.value) {
                     swal(hid);
-                    RestUtils.ajax(Resource.voucher.approveVoucher + hid, Resource.voucher.approveVoucherMethod, {},
+                    RestUtils.ajax(Resource.voucher.approveVoucher + hid, Resource.voucher.approveVoucherMethod, "",
                         function (result) {
                             swal("提示!", "审核成功");
                         });
@@ -131,7 +131,7 @@
         loadData();
 
         function loadData() {
-            RestUtils.ajax(Resource.voucher.getVoucher + "01/2019/5", Resource.voucher.getVoucherMethod, {},
+            RestUtils.ajax(Resource.voucher.getVoucher + "01/2019/5", Resource.voucher.getVoucherMethod, "",
                 function (result) {
                     $("#vouchersUl").empty();
                     $.each(result, function (index, item) {

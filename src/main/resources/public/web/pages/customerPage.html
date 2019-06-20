@@ -65,7 +65,7 @@
 
         //保存按钮事件绑定
         $("#saveButton").click(function () {
-            RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, {},
+            RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, "",
                 function (result) {
                     swal("提示!", "删除成功");
                     //TODO  这里 Url 需要替换成添加的URL 和添加的方法
@@ -95,10 +95,10 @@
             }).then(function (result) {
                 if (result.value) {
                     swal(code);
-                    RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, {},
+                    RestUtils.ajax(Resource.customer.deleteCustomer + "/" + code, Resource.customer.deleteCustomerMethod, "",
                         function (result) {
                             swal("提示!", "删除成功");
-                            RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, {},
+                            RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, "",
                                 function (result) {
                                     customersUl.empty();
                                     $.each(result, function (index, item) {
@@ -117,7 +117,7 @@
         });
 
 
-        RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, {},
+        RestUtils.ajax(Resource.customer.getCustomer, Resource.customer.getCustomerMethod, "",
             function (result) {
                 customersUl.empty();
                 $.each(result, function (index, item) {

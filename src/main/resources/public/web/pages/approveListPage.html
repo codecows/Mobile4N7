@@ -130,14 +130,14 @@
     });
 
     $("#buttonAccept").click(function () {
-        RestUtils.ajax(Resource.approve.approve + $("#curOrderId").val() + "/Y/张三", Resource.approve.approveMethod, {},
+        RestUtils.ajax(Resource.approve.approve + $("#curOrderId").val() + "/Y/张三", Resource.approve.approveMethod, "",
             function (result) {
                 itemDataLoad(code);
             });
         $("#m_modal_approve").modal("hide");
     });
     $("#buttonRefuse").click(function () {
-        RestUtils.ajax(Resource.approve.approve + $("#curOrderId").val() + "/N/张三", Resource.approve.approveMethod, {},
+        RestUtils.ajax(Resource.approve.approve + $("#curOrderId").val() + "/N/张三", Resource.approve.approveMethod, "",
             function (result) {
                 itemDataLoad(code);
             });
@@ -146,7 +146,7 @@
 
     function itemDataLoad(code) {
         level = 2;
-        RestUtils.ajax(Resource.approve.getApprovalPendingItems + code, Resource.approve.getApprovalPendingItemsMethod, {},
+        RestUtils.ajax(Resource.approve.getApprovalPendingItems + code, Resource.approve.getApprovalPendingItemsMethod, "",
             function (result) {
                 $("#approveListUl").empty();
                 if (result.length <= 0) {
@@ -164,7 +164,7 @@
 
     function groupDataLoad() {
         level = 1;
-        RestUtils.ajax(Resource.approve.getApprovalPending + localStorage.getItem("visitor"), Resource.approve.getApprovalPendingMethod, {},
+        RestUtils.ajax(Resource.approve.getApprovalPending + localStorage.getItem("visitor"), Resource.approve.getApprovalPendingMethod, "",
             function (result) {
                 $("#approveListUl").empty();
                 $.each(result, function (index, item) {
