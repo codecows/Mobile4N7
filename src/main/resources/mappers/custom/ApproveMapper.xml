@@ -10,8 +10,12 @@
         SELECT WFCODE 'code',COUNT(*) 'count',
         CASE wfcode WHEN '11108' THEN '进货单' ELSE '采购付款' END 'name'
         FROM TASKLIST
-        WHERE TASKEXPL LIKE '%请审批%'
-        AND performwcode IS NULL GROUP BY WFCODE
+        WHERE ver=0
+        AND taskexpl IS NOT NULL
+        AND limid=30
+        AND performwcode IS NULL
+        AND TASKID NOT IN(SELECT TASKID FROM TASKLIST WHERE ver<![CDATA[ <> ]]>0)
+        GROUP BY WFCODE
     </select>
 
     <resultMap id="PendingApproveItemResultMap" type="com.snsoft.models.ApprovalPendingItem">
