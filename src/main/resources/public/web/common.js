@@ -41,8 +41,8 @@ var RestUtils = function () {
 }();
 
 // TODO  URL
-// var baseUrl = "http://127.0.0.1:8086/";
-var baseUrl = "http://127.0.0.1:8080/";
+ var baseUrl = "http://127.0.0.1:8080/";
+//var baseUrl = "http://192.168.5.103:8080/";
 var Resource = {
     user: {
         login: baseUrl + "users/login",

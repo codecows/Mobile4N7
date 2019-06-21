@@ -34,14 +34,10 @@ var SnippetLogin = function () {
                     }
                 }
             });
-
             if (!form.valid()) {
                 return;
             }
-
             //btn.addClass('m-loader m-loader--right m-loader--light').attr('disabled', true);
-
-
             //var userName = "snsoft";
             var loginRequest = {};
             loginRequest.userId = $("#userId").val();
